@@ -1,0 +1,47 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {
+		  url "https://plugins.gradle.org/m2/"
+	 	}
+	}
+		dependencies {
+			classpath "gradle.plugin.com.heroku.sdk:heroku-gradle:0.2.0"
+			classpath 'org.akhikhl.gretty:gretty:+'
+ 		}
+}
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "idea"
+apply plugin: "com.heroku.sdk.heroku-gradle"
+apply plugin: 'jetty'
+
+heroku {
+   appName = "api-upload-khan-squash"
+	 processTypes(
+      web: "java -jar build/libs/khan-squash-io"
+  )
+}
+
+jar {
+  baseName = "khan-squash-io"
+  version =  "0.1.0"
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.slf4j:slf4j-api:1.7.5'
+	// use latest 2.x series
+  compile group: 'com.sparkjava', name: 'spark-core', version: '2.5'
+	compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+
+//	compile "com.google.appengine:appengine-api-1.0-sdk:1.9.42"
+
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = "3.1"
+}
