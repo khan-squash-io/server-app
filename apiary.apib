@@ -1,0 +1,89 @@
+FORMAT: 1A
+HOST: https://api-upload-khan-squash.herokuapp.com/
+
+# khan-squash-io
+A collection of api's allowing consumers to upload media, scores, find courts, find players.
+
+## Media
+Media methods
+
+## Uploading Media [/1/media/{phone_number}]
+
++ Parameters
+     + phone_number (required, string, `4246101093`) ... authenticated phone number
+
+### POST Media  [POST]
+
+
+
++ Request (multipart/form-data; boundary=---BOUNDARY)
+        
+        {
+            "filename": "test.jpg"
+        }
+
+        -----BOUNDARY
+        /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+        HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIA
+        AhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEB
+        AAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AL+AD//Z
+        -----BOUNDARY
+
++ Response 200 (application/json;charset=UTF-8)
+
+    + Body
+
+            {
+              "success": true
+            }
+          
+
+## Listing Media [/1/media/{phone_number}/]
+### GET List of Media for User [GET]
++ Parameters
+    + phone_number (required, string, `4246101093`) ... authenticated phone number
+
+
++ Response 200 (application/json;charset=UTF-8)
+
+    + Body
+
+            {
+              "success": true
+            }
+
+
+## Get Media [/1/media/{phone_number}/{id}]
+### GET a Media Item for User [GET]
++ Parameters
+    + phone_number (required, string, `4246101093`) ... authenticated phone number
+    + id (required, string, `123.abc`) ... s3ky
+
++ Response 200 (application/json;charset=UTF-8)
+
+    + Body
+
+            {
+              "success": true
+            }
+            
+            
+
+## Delete a Media Item [/1/media/delete/{phone_number}/{id}]
+### DELETE Media [DELETE]
++ Parameters
+    + phone_number (required, string, `4246101093`) ... authenticated phone number
+    + id (required, string, `123.abc`) ... s3ky
+
++ Request (application/json)
+
+            {
+                's3key':'knock/community/d3d3Lmdvb2dsZS5jb20xMC0zMS0xOTkx.jpg'
+            }
+
++ Response 201 (application/json)
+
+            {
+                'deleted': 'knock/community/d3d3Lmdvb2dsZS5jb20xMC0zMS0xOTkx.jpg' 
+            }
